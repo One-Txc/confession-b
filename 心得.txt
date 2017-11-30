@@ -1,0 +1,7 @@
+
+
+多环境的切换：
+可以在开发时在配置文件中写：spring.profiles.active=dev(开发环境)
+测试：在测试服务器上用start.sh运行：java -jar Chapter3-1-1-1.0.0.jar --spring.profiles.active=test
+测试：在测试服务器上用start.sh运行：java -jar Chapter3-1-1-1.0.0.jar --spring.profiles.active=prod
+这样感觉可以减少每次环境改变做的修改。也可以不使用maven的环境切换功能（觉得比较麻烦，也可能是自己太菜了）
