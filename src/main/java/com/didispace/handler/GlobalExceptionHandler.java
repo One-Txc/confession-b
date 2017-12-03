@@ -20,8 +20,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     public ModelAndView defaultErrorHandler(HttpServletRequest req, HttpServletResponse rep, Exception e) throws Exception {
-        logger.warn(e.getMessage());
-        e.printStackTrace();
+        logger.error(e,e);
         if(WebUtil.isAjax(req)){
             rep.addHeader("Content-Type","application/json;charset=UTF-8");
             PrintWriter out = rep.getWriter();
