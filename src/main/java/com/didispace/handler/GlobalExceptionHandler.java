@@ -16,8 +16,11 @@ import java.io.PrintWriter;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+
     @ExceptionHandler
     public ModelAndView defaultErrorHandler(HttpServletRequest req, HttpServletResponse rep, Exception e) throws Exception {
+
+
 
         if(WebUtil.isAjax(req)){
             rep.addHeader("Content-Type","application/json;charset=UTF-8");

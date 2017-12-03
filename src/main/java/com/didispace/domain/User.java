@@ -1,6 +1,7 @@
 package com.didispace.domain;
 
 
+import java.io.Serializable;
 
 /**
  *
@@ -9,7 +10,7 @@ package com.didispace.domain;
  * @blog http://blog.didispace.com
  *
  */
-public class User {
+public class User implements Serializable{
 
     private Long id;
     private String name;
@@ -19,23 +20,26 @@ public class User {
         return id;
     }
 
-    public void setId(Long id) {
+    public User setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public User setName(String name) {
         this.name = name;
+        return this;
     }
 
     public Integer getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public User setAge(Integer age) {
         this.age = age;
+        return this;
     }
 }
