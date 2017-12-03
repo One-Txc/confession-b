@@ -1,6 +1,7 @@
 package com.didispace.handler;
 
 import com.didispace.util.WebUtil;
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,13 +16,12 @@ import java.io.PrintWriter;
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {
-
+    private Logger logger = Logger.getLogger(getClass());
 
     @ExceptionHandler
     public ModelAndView defaultErrorHandler(HttpServletRequest req, HttpServletResponse rep, Exception e) throws Exception {
-
-
-
+        logger.warn(e.getMessage());
+        e.printStackTrace();
         if(WebUtil.isAjax(req)){
             rep.addHeader("Content-Type","application/json;charset=UTF-8");
             PrintWriter out = rep.getWriter();
