@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 
 /**
- * 同一的controller层异常处理：实现对.ajax和普通的http请求返回不同的类型数据
+ * 统一的controller层异常处理：实现对.ajax和普通的http请求返回不同的类型数据
  * Created by txc on 17-12-3.
  */
 @ControllerAdvice
