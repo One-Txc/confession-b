@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by txc on 17-12-4.
  */
-public interface UserMapper {
+public interface AnnotationUserMapper {
     @Select("SELECT * FROM users")
     @Results({
             @Result(property = "id",  column = "id", javaType = Long.class),
