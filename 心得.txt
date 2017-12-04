@@ -5,3 +5,41 @@
 测试：在测试服务器上用start.sh运行：java -jar Chapter3-1-1-1.0.0.jar --spring.profiles.active=test
 测试：在测试服务器上用start.sh运行：java -jar Chapter3-1-1-1.0.0.jar --spring.profiles.active=prod
 这样感觉可以减少每次环境改变做的修改。也可以不使用maven的环境切换功能（maven的环境切换觉得比较麻烦，也可能是自己太菜了）
+
+
+关于spring默认缓存－redis部分：
+相关类：
+org.springframework.data.redis.cache.RedisCacheManager              －－CacheManager
+class org.springframework.data.redis.cache.RedisCache               －－Cache
+org.springframework.cache.interceptor.SimpleKeyGenerator            －－默认的KeyGenerator生成类
+org.springframework.cache.annotation.CachingConfigurerSupport       －－应该用于自定义配置的扩展类
+
+注解
+@Cacheable(value="user01-key")
+1.CacheManager.getCache根据@Cacheable的value生成一个Cache对象
+2.如果@CachePut／@Cacheable中的key属性
+        没有指定：SimpleKeyGenerator.generateKey产生一个key(应该是用于redis数据库的存取)具体生成规则看类代码
+        指定了属性：会根据值生成一个key具体类没找到
+3.cache则做具体的存／取操作。
+
+key属性说明：
+@CachePut中的key属性，
+    存的时候:
+        key指向 基本类型／不可变对象(测试了String)：取方法执行前的值             －－－例如：key = "#name"；
+        key指向 普通对象/普通对象的某个属性：取方法执行后的值                     －－－例如：key = "#user"；key = "#user.name"；
+@Cacheable中的key属性，
+    取的时候:取方法执行前的入参对象的数据，
+    存的时候:
+        key指向 基本类型／不可变对象(测试了String)／普通对象的某个属性：取方法执行前的值                －－－例如：key = "#user.name"；key = "#name"；
+        key指向普通对象：取方法执行后的值                                                           －－－例如：key = "#user"；
+建议：尽量让key取不会变的属性，这样不用注意这种细节。而且设计上应该也是取那种不被修改的属性吧
+
+
+
+redis中同一个配置生成多个cache对象并没什么用。因为SimpleKeyGenerator生成的key和cacheName没什么关系。
+建议：redis如果想要产生多个不同的cache对象，建议自己实现一个KeyGenerator，使生成的key前缀带上cacheName，不然没什么意义
+
+
+
+
+

@@ -8,7 +8,7 @@
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>Chapter3-1-1</name>
+	<name>springboot-study</name>
 	<description>RESTful API Project</description>
 
 	<parent>
