@@ -23,15 +23,27 @@ public class CacheTestController {
         return user;
     }
 
+    /**
+     * 假设入参：http:xxx?name=sss
+     * key的name＝77777
+     * @param user
+     * @return
+     */
     @RequestMapping("/getUser01")
     @Cacheable(value="user01-key",key = "#user")
     public User getUser01(User user) {
-        user.setName("777");
+        user.setName("77777");
         System.out.println(cacheManager.getClass());
         System.out.println("getUser01");
         return user;
     }
 
+    /**
+     * 假设入参：http:xxx?name=sss
+     * key的name＝sss
+     * @param user
+     * @return
+     */
     @RequestMapping("/getUser02")
     @Cacheable(value="user01-key",key = "#user.name")
     public User getUser02(User user) {
@@ -41,6 +53,11 @@ public class CacheTestController {
         return user;
     }
 
+    /**
+     * 假设入参：http:xxx?name=sss
+     * key的name＝sss
+     * @return
+     */
     @RequestMapping("/getUser03")
     @Cacheable(value="user01-key",key = "#name")
     public User getUser03(String name) {
@@ -66,6 +83,11 @@ public class CacheTestController {
         return user;
     }
 
+    /**
+     * 假设入参：http:xxx?name=sss
+     * key的name＝sss
+     * @return
+     */
     @RequestMapping("/updateUser01")
     @CachePut(value="user01-key",key = "#name")
     public User updateUser01(String name) {
@@ -74,6 +96,12 @@ public class CacheTestController {
         return getAUser(222);
     }
 
+    /**
+     * 假设入参：http:xxx?name=sss
+     * key的name＝qqq
+     * @param user
+     * @return
+     */
     @RequestMapping("/updateUser02")
     @CachePut(value="user01-key",key = "#user.name")
     public User updateUser02(User user) {
@@ -82,6 +110,12 @@ public class CacheTestController {
         return user;
     }
 
+    /**
+     * 假设入参：http:xxx?name=sss
+     * key的name＝qqq
+     * @param user
+     * @return
+     */
     @RequestMapping("/updateUser03")
     @CachePut(value="user01-key",key = "#user")
     public User updateUser03(User user) {
