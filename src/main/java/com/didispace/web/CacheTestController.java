@@ -126,11 +126,7 @@ public class CacheTestController {
 
 
     private User getAUser(int xx){
-        User user = new User();
-        user.setId(xx+0L);
-        user.setAge(xx);
-        user.setName(xx+"");
-        return user;
+        return User.newAUser(xx);
     }
 
 

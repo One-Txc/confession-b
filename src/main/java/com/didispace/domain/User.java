@@ -43,4 +43,21 @@ public class User implements Serializable{
         this.age = age;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
+    public static User newAUser(int i){
+        User user = new User();
+        user.setId(i+0L);
+        user.setAge(i);
+        user.setName(i+"");
+        return user;
+    }
 }

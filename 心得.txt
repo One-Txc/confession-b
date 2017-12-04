@@ -40,6 +40,18 @@ redis中同一个配置生成多个cache对象并没什么用。因为SimpleKeyG
 建议：redis如果想要产生多个不同的cache对象，建议自己实现一个KeyGenerator，使生成的key前缀带上cacheName，不然没什么意义
 
 
+spring-boot-redis:
+	使用springboot的redis客户端，感觉很简单。
+	1.加入依赖：spring-boot-starter-redis
+	2.在配置文件中添加redis的属性设置：spring.redis.
+	就可以使用spring的自动注入功能获取获取：StringRedisTemplate和RedisTemplate对象,
+	他们的具体api参考http://www.jianshu.com/p/7bf5dc61ca06
+
+ userList.forEach((user)->{
+            System.out.println(user.toString());
+            return; //不会中断循环
+        });
+ 没法中途跳出的
 
 
 
