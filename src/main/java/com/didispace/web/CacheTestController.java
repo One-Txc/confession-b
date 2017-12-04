@@ -18,26 +18,38 @@ public class CacheTestController {
     @Cacheable(value="user00-key")
     public User getUser00() {
         System.out.println(cacheManager.getClass());
-        User user = new User();
-        user.setId(123L);
-        user.setAge(12);
-        user.setName("txc");
+        User user = getAUser(123);
         System.out.println("getUser00");
         return user;
     }
 
     @RequestMapping("/getUser01")
-    @Cacheable(value="user01-key",key = "#u")
-    public User getUser01(User u) {
-        u.setName("777");
+    @Cacheable(value="user01-key",key = "#user")
+    public User getUser01(User user) {
+        user.setName("777");
         System.out.println(cacheManager.getClass());
-        User user = new User();
-        user.setId(222L);
-        user.setAge(22);
-        user.setName("ttxxcc");
         System.out.println("getUser01");
         return user;
     }
+
+    @RequestMapping("/getUser02")
+    @Cacheable(value="user01-key",key = "#user.name")
+    public User getUser02(User user) {
+        user.setName("777");
+        System.out.println(cacheManager.getClass());
+        System.out.println("getUser02");
+        return user;
+    }
+
+    @RequestMapping("/getUser03")
+    @Cacheable(value="user01-key",key = "#name")
+    public User getUser03(String name) {
+        name = "777";
+        System.out.println("getUser03");
+        return getAUser(333);
+    }
+
+
 
     @RequestMapping("/getString")
     @Cacheable(value="string-key")
@@ -49,10 +61,7 @@ public class CacheTestController {
     @RequestMapping("/updateUser00")
     @CachePut(value="user01-key")
     public User updateUser00() {
-        User user = new User();
-        user.setId(888L);
-        user.setAge(888);
-        user.setName("888");
+        User user = getAUser(111);
         System.out.println("updateUser00");
         return user;
     }
@@ -61,15 +70,34 @@ public class CacheTestController {
     @CachePut(value="user01-key",key = "#name")
     public User updateUser01(String name) {
         name = "qqq";
-        User user = new User();
-        user.setId(666L);
-        user.setAge(666);
-        user.setName("666");
         System.out.println("updateUser01");
+        return getAUser(222);
+    }
+
+    @RequestMapping("/updateUser02")
+    @CachePut(value="user01-key",key = "#user.name")
+    public User updateUser02(User user) {
+        user.setName("qqq");
+        System.out.println("updateUser02");
+        return user;
+    }
+
+    @RequestMapping("/updateUser03")
+    @CachePut(value="user01-key",key = "#user")
+    public User updateUser03(User user) {
+        user.setName("qqq");
+        System.out.println("updateUser03");
         return user;
     }
 
 
+    private User getAUser(int xx){
+        User user = new User();
+        user.setId(xx+0L);
+        user.setAge(xx);
+        user.setName(xx+"");
+        return user;
+    }
 
 
 
