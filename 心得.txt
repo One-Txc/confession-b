@@ -55,7 +55,9 @@ spring-boot-redis:
 
  用spring的缓存机制还是mybatis的缓存机制？
         个人感觉spring的会用处大点。
-        mybatis的一级缓存在由spring初始化mapper类的情况下我还没找到使用的点在哪里.而且一级缓存的功能可以通过代码的技巧实现。
+        mybatis的一级缓   在spring web项目中一级缓存作用在被@Transactional注解的方法中。
+                                参考MybatisTestController.xmlGetAll()方法加和不加@Transactional控制台的sql打印次数
+                         而且一级缓存的功能可以通过代码的技巧实现。个人认为
         mybatis的二级缓存-- todo
 
  缓存和高并发的冲突？

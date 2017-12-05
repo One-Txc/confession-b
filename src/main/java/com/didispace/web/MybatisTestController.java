@@ -4,6 +4,7 @@ import com.didispace.domain.User;
 import com.didispace.mapper.AnnotationUserMapper;
 import com.didispace.mapper.XmlUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,6 +48,7 @@ public class MybatisTestController {
     }
 
     @RequestMapping("mybatis/xml/getAll")
+//    @Transactional
     public String xmlGetAll() {
         List<User> userList = xmlUserMapper.getAll();
         userList.forEach((user)->{
