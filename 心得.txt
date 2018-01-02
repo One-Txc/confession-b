@@ -1,4 +1,32 @@
 
+Spring Boot使用非常特别的PropertySource命令，旨在允许合理地覆盖值。属性按以下顺序选择：
+
+在您的HOME目录设置的Devtools全局属性（~/.spring-boot-devtools.properties）。
+单元测试中的 @TestPropertySource 注解。
+单元测试中的 @SpringBootTest#properties 注解属性
+命令行参数。
+SPRING_APPLICATION_JSON 中的属性值（内嵌JSON嵌入到环境变量或系统属性中）。
+ServletConfig 初始化参数。
+ServletContext 初始化参数。
+来自 java:comp/env 的JNDI属性。
+Java系统属性（System.getProperties()）。
+操作系统环境变量。
+RandomValuePropertySource，只有随机的属性 random.* 中。
+jar包外面的 Profile-specific application properties （application- {profile} .properties和YAML变体）
+jar包内的 Profile-specific application properties （application-{profile}.properties和YAML变体）
+jar包外的应用属性文件（application.properties和YAML变体）。
+jar包内的应用属性文件（application.properties和YAML变体）。
+在@Configuration上的@PropertySource注解。
+默认属性（使用SpringApplication.setDefaultProperties设置）。
+
+做个spring boot 监控文件夹的变化－－－非web
+
+
+
+
+
+
+
 
 多环境的切换：
 可以在开发时在配置文件中写：spring.profiles.active=dev(开发环境)
