@@ -4,6 +4,7 @@ import com.didispace.domain.User;
 
 import java.util.*;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -35,7 +36,7 @@ public class UserController {
         return "success";
     }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.GET)
+    @RequestMapping(value="/{id}", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public User getUser(@PathVariable Long id) {
         // 处理"/users/{id}"的GET请求，用来获取url中id值的User信息
         // url中的id可通过@PathVariable绑定到函数的参数中
