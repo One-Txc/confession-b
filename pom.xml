@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.didispace</groupId>
-	<artifactId>Chapter3-1-1</artifactId>
+	<artifactId>spring-boot-study</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
