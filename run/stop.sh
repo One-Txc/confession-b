@@ -1,5 +1,9 @@
 #!/bin/bash
-PID=$(ps -ef | grep Chapter3-1-1-1.0.0.jar | grep -v grep | awk '{ print $2 }')
+PID=$(ps -ef | grep spring-boot-study-1.0.0.jar | grep -v grep | awk '{ print $2 }')
+
+#PID=$(lsof -i:4202 | grep "(LISTEN)" | grep -v grep | awk '{ print $2 }')
+
+
 if [ -z "$PID" ]
 then
     echo Application is already stopped
