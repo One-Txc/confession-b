@@ -1,9 +1,11 @@
 package com.didispace.handler;
 
+import com.didispace.exception.MyException;
 import com.didispace.util.WebUtil;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,30 +23,22 @@ public class GlobalExceptionHandler {
     @ExceptionHandler
     public ModelAndView defaultErrorHandler(HttpServletRequest req, HttpServletResponse rep, Exception e) throws Exception {
         logger.error(e,e);
-        if(WebUtil.isAjax(req)){
-            rep.addHeader("Content-Type","application/json;charset=UTF-8");
-            PrintWriter out = rep.getWriter();
-            out.println("{\"msg\":\"{0}\"}".replace("{0}",e.getMessage()));
-            out.flush();
-            out.close();
-            return null;
-        }else {
-            ModelAndView mav = new ModelAndView();
-            mav.addObject("exception", e);
-            mav.addObject("url", req.getRequestURL());
-            mav.setViewName("error");
-            return mav;
-        }
+        rep.addHeader("Content-Type","application/json;charset=UTF-8");
+        PrintWriter out = rep.getWriter();
+        out.println("{\"msg\":\"{0}\"}".replace("{0}",e.getMessage()));
+        out.flush();
+        out.close();
+        return null;
     }
 
-    /*@ExceptionHandler(value = MyException.class)
-    @ResponseBody
-    public ErrorInfo<String> jsonErrorHandler(HttpServletRequest req, HttpServletResponse rep, MyException e) throws Exception {
-        ErrorInfo<String> r = new ErrorInfo<>();
-        r.setMessage(e.getMessage());
-        r.setCode(ErrorInfo.ERROR);
-        r.setData("Some Data");
-        r.setUrl(req.getRequestURL().toString());
-        return r;
-    }*/
+//    @ExceptionHandler(value = MyException.class)
+//    @ResponseBody
+//    public ErrorInfo<String> jsonErrorHandler(HttpServletRequest req, HttpServletResponse rep, MyException e) throws Exception {
+//        ErrorInfo<String> r = new ErrorInfo<>();
+//        r.setMessage(e.getMessage());
+//        r.setCode(ErrorInfo.ERROR);
+//        r.setData("Some Data");
+//        r.setUrl(req.getRequestURL().toString());
+//        return r;
+//    }
 }

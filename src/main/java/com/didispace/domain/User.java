@@ -10,6 +10,7 @@ import java.io.Serializable;
  * @blog http://blog.didispace.com
  *
  */
+
 public class User implements Serializable{
     private static final long serialVersionUID = 3693181326326276865L;
 
