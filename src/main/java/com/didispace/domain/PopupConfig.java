@@ -21,15 +21,15 @@ public class PopupConfig implements Serializable {
 
     @Id
     @GeneratedValue
-    private Long popup_config_id;
+    private Long popupConfigId;
     @Column
-    private Long main_config_id;
+    private Long mainConfigId;
     @Column
-    private String group_type;
+    private String groupType;  //分组[ok-ok按钮的配置,no按钮的配置]
     @Column
-    private Integer order;
+    private Integer orderIndex;
     @Column
-    private String type;
+    private String type;    //type(msg-消息提示,html-弹框)
     @Column
     private Integer icon;
     @Column
@@ -39,40 +39,40 @@ public class PopupConfig implements Serializable {
     @Column
     private String content;
     @Column
-    private Timestamp create_time;
+    private Timestamp createTime;
     @Column
-    private Timestamp update_time;
+    private Timestamp updateTime;
 
-    public Long getPopup_config_id() {
-        return popup_config_id;
+    public Long getPopupConfigId() {
+        return popupConfigId;
     }
 
-    public void setPopup_config_id(Long popup_config_id) {
-        this.popup_config_id = popup_config_id;
+    public void setPopupConfigId(Long popupConfigId) {
+        this.popupConfigId = popupConfigId;
     }
 
-    public Long getMain_config_id() {
-        return main_config_id;
+    public Long getMainConfigId() {
+        return mainConfigId;
     }
 
-    public void setMain_config_id(Long main_config_id) {
-        this.main_config_id = main_config_id;
+    public void setMainConfigId(Long mainConfigId) {
+        this.mainConfigId = mainConfigId;
     }
 
-    public String getGroup_type() {
-        return group_type;
+    public String getGroupType() {
+        return groupType;
     }
 
-    public void setGroup_type(String group_type) {
-        this.group_type = group_type;
+    public void setGroupType(String groupType) {
+        this.groupType = groupType;
     }
 
-    public Integer getOrder() {
-        return order;
+    public Integer getOrderIndex() {
+        return orderIndex;
     }
 
-    public void setOrder(Integer order) {
-        this.order = order;
+    public void setOrderIndex(Integer orderIndex) {
+        this.orderIndex = orderIndex;
     }
 
     public String getType() {
@@ -115,19 +115,19 @@ public class PopupConfig implements Serializable {
         this.content = content;
     }
 
-    public Timestamp getCreate_time() {
-        return create_time;
+    public Timestamp getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(Timestamp create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
     }
 
-    public Timestamp getUpdate_time() {
-        return update_time;
+    public Timestamp getUpdateTime() {
+        return updateTime;
     }
 
-    public void setUpdate_time(Timestamp update_time) {
-        this.update_time = update_time;
+    public void setUpdateTime(Timestamp updateTime) {
+        this.updateTime = updateTime;
     }
 }

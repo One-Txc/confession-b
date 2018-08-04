@@ -23,38 +23,42 @@ public class MainConfig implements Serializable{
 
     @Id
     @GeneratedValue
-    private Long main_config_id;
+    private Long mainConfigId;
     @Column
-    private String titile;
+    private String title;
     @Column
     private String question;
     @Column
+    private String leftButtonText;
+    @Column
+    private String rightButtonText;
+    @Column
     private String tel;
     @Column
-    private String taobao_account;
+    private String taobaoAccount;
     @Column
-    private Timestamp start_time;
+    private Timestamp startTime;
     @Column
-    private Timestamp end_time;
+    private Timestamp endTime;
     @Column
-    private Timestamp create_time;
+    private Timestamp createTime;
     @Column
-    private Timestamp update_time;
+    private Timestamp updateTime;
 
-    public Long getMain_config_id() {
-        return main_config_id;
+    public Long getMainConfigId() {
+        return mainConfigId;
     }
 
-    public void setMain_config_id(Long main_config_id) {
-        this.main_config_id = main_config_id;
+    public void setMainConfigId(Long mainConfigId) {
+        this.mainConfigId = mainConfigId;
     }
 
-    public String getTitile() {
-        return titile;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitile(String titile) {
-        this.titile = titile;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getQuestion() {
@@ -65,6 +69,22 @@ public class MainConfig implements Serializable{
         this.question = question;
     }
 
+    public String getLeftButtonText() {
+        return leftButtonText;
+    }
+
+    public void setLeftButtonText(String leftButtonText) {
+        this.leftButtonText = leftButtonText;
+    }
+
+    public String getRightButtonText() {
+        return rightButtonText;
+    }
+
+    public void setRightButtonText(String rightButtonText) {
+        this.rightButtonText = rightButtonText;
+    }
+
     public String getTel() {
         return tel;
     }
@@ -73,58 +93,43 @@ public class MainConfig implements Serializable{
         this.tel = tel;
     }
 
-    public String getTaobao_account() {
-        return taobao_account;
+    public String getTaobaoAccount() {
+        return taobaoAccount;
     }
 
-    public void setTaobao_account(String taobao_account) {
-        this.taobao_account = taobao_account;
+    public void setTaobaoAccount(String taobaoAccount) {
+        this.taobaoAccount = taobaoAccount;
     }
 
-    public Timestamp getStart_time() {
-        return start_time;
+    public Timestamp getStartTime() {
+        return startTime;
     }
 
-    public void setStart_time(Timestamp start_time) {
-        this.start_time = start_time;
+    public void setStartTime(Timestamp startTime) {
+        this.startTime = startTime;
     }
 
-    public Timestamp getEnd_time() {
-        return end_time;
+    public Timestamp getEndTime() {
+        return endTime;
     }
 
-    public void setEnd_time(Timestamp end_time) {
-        this.end_time = end_time;
+    public void setEndTime(Timestamp endTime) {
+        this.endTime = endTime;
     }
 
-    public Timestamp getCreate_time() {
-        return create_time;
+    public Timestamp getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(Timestamp create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
     }
 
-    public Timestamp getUpdate_time() {
-        return update_time;
+    public Timestamp getUpdateTime() {
+        return updateTime;
     }
 
-    public void setUpdate_time(Timestamp update_time) {
-        this.update_time = update_time;
-    }
-
-    @Override
-    public String toString() {
-        return "MainConfig{" +
-                "main_config_id=" + main_config_id +
-                ", titile='" + titile + '\'' +
-                ", question='" + question + '\'' +
-                ", tel='" + tel + '\'' +
-                ", taobao_account='" + taobao_account + '\'' +
-                ", start_time=" + start_time +
-                ", end_time=" + end_time +
-                ", create_time=" + create_time +
-                ", update_time=" + update_time +
-                '}';
+    public void setUpdateTime(Timestamp updateTime) {
+        this.updateTime = updateTime;
     }
 }
