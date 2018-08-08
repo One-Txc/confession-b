@@ -29,3 +29,7 @@ CREATE TABLE `popup_config` (
   PRIMARY KEY (`popup_config_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8mb4 COMMENT='弹窗配置表';
 
+
+create user 'confession'@'%' identified by '123456';
+
+grant all privileges on `confession`.* to 'confession'@'%' identified by '123456';

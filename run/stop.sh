@@ -1,5 +1,5 @@
 #!/bin/bash
-PID=$(ps -ef | grep spring-boot-study-1.0.0.jar | grep -v grep | awk '{ print $2 }')
+PID=$(ps -ef | grep confession-b-1.0.0.jar | grep -v grep | awk '{ print $2 }')
 
 #PID=$(lsof -i:4202 | grep "(LISTEN)" | grep -v grep | awk '{ print $2 }')
 
