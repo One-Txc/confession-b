@@ -29,7 +29,7 @@ public class MainConfigController {
     @Autowired
     PopupConfigRespository popupConfigRespository;
 
-    @RequestMapping(value="/confession/mc/{id}", method=RequestMethod.GET)
+    @RequestMapping(value="/mc/{id}", method=RequestMethod.GET)
     public ConfigCust gerMc(@PathVariable Long id) {
         MainConfig mc = mainConfigRepository.getOne(id);
         Sort sort = new Sort("orderIndex");
@@ -45,7 +45,7 @@ public class MainConfigController {
         return result;
     }
 
-    @RequestMapping(value="/confession/mcm/{id}", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/mcm/{id}", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String ss(@PathVariable Long id) {
         return "qqqq";
     }
@@ -54,7 +54,7 @@ public class MainConfigController {
 
 
 
-    @RequestMapping(value="/confession/mc/save")
+    @RequestMapping(value="/mc/save")
     public ResultData save(@RequestBody Map map) {
         MainConfig mainConfig = JSON.parseObject(JSON.toJSONString(map.get("mainConfig")),MainConfig.class);
         List<PopupConfig> leftButtonPopupCofigList = JSON.parseArray(JSON.toJSONString(map.get("leftButtonPopupCofigList")),PopupConfig.class);
