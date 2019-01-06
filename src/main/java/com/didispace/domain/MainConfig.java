@@ -37,6 +37,10 @@ public class MainConfig implements Serializable{
     @Column
     private String taobaoAccount;
     @Column
+    private String authorizationCode;
+    @Column
+    private String status;
+    @Column
     private Timestamp startTime;
     @Column
     private Timestamp endTime;
@@ -44,6 +48,22 @@ public class MainConfig implements Serializable{
     private Timestamp createTime;
     @Column
     private Timestamp updateTime;
+
+    public String getAuthorizationCode() {
+        return authorizationCode;
+    }
+
+    public void setAuthorizationCode(String authorizationCode) {
+        this.authorizationCode = authorizationCode;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Long getMainConfigId() {
         return mainConfigId;

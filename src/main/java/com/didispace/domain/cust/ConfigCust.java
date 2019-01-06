@@ -13,6 +13,11 @@ import java.util.List;
 public class ConfigCust implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    public static String failStatus = "9999";
+
+    private String resultStatus;
+    private String errorMsg;
+
     private MainConfig mainConfig;
     private List<PopupConfig> leftButtonPopupCofigList;
     private List<PopupConfig> rightButtonPopupCofigList;
@@ -39,5 +44,21 @@ public class ConfigCust implements Serializable {
 
     public void setRightButtonPopupCofigList(List<PopupConfig> rightButtonPopupCofigList) {
         this.rightButtonPopupCofigList = rightButtonPopupCofigList;
+    }
+
+    public String getResultStatus() {
+        return resultStatus;
+    }
+
+    public void setResultStatus(String resultStatus) {
+        this.resultStatus = resultStatus;
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
     }
 }
