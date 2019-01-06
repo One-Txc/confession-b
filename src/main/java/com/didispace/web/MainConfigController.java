@@ -26,7 +26,7 @@ import java.util.Map;
  * @author: txc
  * @date: 18-7-28 下午6:33
  */
-@RequestMapping(value="confession")
+//@RequestMapping(value="confession")
 @RestController
 public class MainConfigController {
     @Autowired
