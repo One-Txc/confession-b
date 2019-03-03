@@ -26,7 +26,7 @@ import java.util.Map;
  * @author: txc
  * @date: 18-7-28 下午6:33
  */
-//@RequestMapping(value="confession")
+@RequestMapping(value="confession")
 @RestController
 public class MainConfigController {
     @Autowired
@@ -42,17 +42,17 @@ public class MainConfigController {
         MainConfig mc = mainConfigRepository.getOne(id);
 
         //校验
-        if("0".equals(mc.getStatus())){
-            result.setResultStatus(ConfigCust.failStatus);
-            result.setErrorMsg("配置过期了");
-            return result;
-        }
-        Timestamp now = new Timestamp(System.currentTimeMillis());
-        if(mc.getEndTime()!=null && mc.getEndTime().after(now)){
-            result.setResultStatus(ConfigCust.failStatus);
-            result.setErrorMsg("配置过期了");
-            return result;
-        }
+//        if("0".equals(mc.getStatus())){
+//            result.setResultStatus(ConfigCust.failStatus);
+//            result.setErrorMsg("配置过期了");
+//            return result;
+//        }
+//        Timestamp now = new Timestamp(System.currentTimeMillis());
+//        if(mc.getEndTime()!=null && mc.getEndTime().after(now)){
+//            result.setResultStatus(ConfigCust.failStatus);
+//            result.setErrorMsg("配置过期了");
+//            return result;
+//        }
 
         Sort sort = new Sort("orderIndex");
         List<PopupConfig> leftList = popupConfigRespository.findAllByMainConfigIdAndAndGroupType(id,"left",sort);
@@ -104,15 +104,15 @@ public class MainConfigController {
         List<PopupConfig> rightButtonPopupCofigList = JSON.parseArray(JSON.toJSONString(map.get("rightButtonPopupCofigList")),PopupConfig.class);
 
         //authorizationCode校验
-        String authorizationCode = mainConfig.getAuthorizationCode();
-        if(!addCheckAuthorizationCode(authorizationCode)){
-            return ResultData.fail("授权码有误");
-        }
-
-        //code无效化
-        AuthorizationCode codeInfo = authorizationCodeRepository.getOne(authorizationCode);
-        codeInfo.setUsedAddCount(codeInfo.getUsedAddCount()+1);
-        authorizationCodeRepository.save(codeInfo);
+//        String authorizationCode = mainConfig.getAuthorizationCode();
+//        if(!addCheckAuthorizationCode(authorizationCode)){
+//            return ResultData.fail("授权码有误");
+//        }
+//
+//        //code无效化
+//        AuthorizationCode codeInfo = authorizationCodeRepository.getOne(authorizationCode);
+//        codeInfo.setUsedAddCount(codeInfo.getUsedAddCount()+1);
+//        authorizationCodeRepository.save(codeInfo);
 
         //数据填充
         mainConfig.setStartTime(new Timestamp(System.currentTimeMillis()));
