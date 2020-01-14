@@ -21,31 +21,70 @@ import java.sql.Timestamp;
 public class MainConfig implements Serializable{
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 配置id
+     */
     @Id
     @GeneratedValue
     private Long mainConfigId;
+    /**
+     * 标题
+     */
     @Column
     private String title;
+    /**
+     * 左边问题
+     */
     @Column
     private String question;
+    /**
+     * 左边按钮文字
+     */
     @Column
     private String leftButtonText;
+    /**
+     * 右边按钮文字
+     */
     @Column
     private String rightButtonText;
+    /**
+     * 用户手机号
+     */
     @Column
     private String tel;
+    /**
+     * 用户淘宝账号
+     */
     @Column
     private String taobaoAccount;
+    /**
+     * 授权码
+     */
     @Column
     private String authorizationCode;
+    /**
+     * 状态:0-不可用,1-可用
+     */
     @Column
     private String status;
+    /**
+     * 生效时间
+     */
     @Column
     private Timestamp startTime;
+    /**
+     * 失效时间
+     */
     @Column
     private Timestamp endTime;
+    /**
+     * 创建
+     */
     @Column
     private Timestamp createTime;
+    /**
+     * 更新
+     */
     @Column
     private Timestamp updateTime;
 

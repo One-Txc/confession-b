@@ -37,22 +37,22 @@ public class MainConfigController {
     AuthorizationCodeRepository authorizationCodeRepository;
 
     @RequestMapping(value="/mc/{id}", method=RequestMethod.GET)
-    public ConfigCust gerMc(@PathVariable Long id) {
+    public ConfigCust getMc(@PathVariable Long id) {
         ConfigCust result = new ConfigCust();
         MainConfig mc = mainConfigRepository.getOne(id);
 
         //校验
-//        if("0".equals(mc.getStatus())){
-//            result.setResultStatus(ConfigCust.failStatus);
-//            result.setErrorMsg("配置过期了");
-//            return result;
-//        }
-//        Timestamp now = new Timestamp(System.currentTimeMillis());
-//        if(mc.getEndTime()!=null && mc.getEndTime().after(now)){
-//            result.setResultStatus(ConfigCust.failStatus);
-//            result.setErrorMsg("配置过期了");
-//            return result;
-//        }
+        if("0".equals(mc.getStatus())){
+            result.setResultStatus(ConfigCust.failStatus);
+            result.setErrorMsg("配置过期了");
+            return result;
+        }
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        if(mc.getEndTime()!=null && mc.getEndTime().before(now)){
+            result.setResultStatus(ConfigCust.failStatus);
+            result.setErrorMsg("配置过期了");
+            return result;
+        }
 
         Sort sort = new Sort("orderIndex");
         List<PopupConfig> leftList = popupConfigRespository.findAllByMainConfigIdAndAndGroupType(id,"left",sort);
@@ -60,16 +60,11 @@ public class MainConfigController {
         result.setMainConfig(mc);
         result.setLeftButtonPopupCofigList(leftList);
         result.setRightButtonPopupCofigList(rightList);
-
         //mc.getTitile();
         //System.out.println(mc.toString());
         return result;
     }
 
-    @RequestMapping(value="/mcm/{id}", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String ss(@PathVariable Long id) {
-        return "qqqq";
-    }
 
 
     @RequestMapping(value="/authorizationCode/creat/{count}", method=RequestMethod.GET)
@@ -104,15 +99,18 @@ public class MainConfigController {
         List<PopupConfig> rightButtonPopupCofigList = JSON.parseArray(JSON.toJSONString(map.get("rightButtonPopupCofigList")),PopupConfig.class);
 
         //authorizationCode校验
-//        String authorizationCode = mainConfig.getAuthorizationCode();
-//        if(!addCheckAuthorizationCode(authorizationCode)){
-//            return ResultData.fail("授权码有误");
-//        }
-//
-//        //code无效化
-//        AuthorizationCode codeInfo = authorizationCodeRepository.getOne(authorizationCode);
-//        codeInfo.setUsedAddCount(codeInfo.getUsedAddCount()+1);
-//        authorizationCodeRepository.save(codeInfo);
+        String authorizationCode = mainConfig.getAuthorizationCode();
+        if(!addCheckAuthorizationCode(authorizationCode)){
+            return ResultData.fail("授权码有误");
+        }
+
+        //code无效化
+        AuthorizationCode codeInfo = authorizationCodeRepository.getOne(authorizationCode);
+        codeInfo.setUsedAddCount(codeInfo.getUsedAddCount()+1);
+        if(codeInfo.getUsedAddCount()>=codeInfo.getAbleAddCount()){
+            codeInfo.setCodeStatus("0");
+        }
+        authorizationCodeRepository.save(codeInfo);
 
         //数据填充
         mainConfig.setStartTime(new Timestamp(System.currentTimeMillis()));
@@ -161,13 +159,13 @@ public class MainConfigController {
         if(codeInfo.getAbleAddCount() <= codeInfo.getUsedAddCount()){
             return false;
         }
-        /*Timestamp now = new Timestamp(System.currentTimeMillis());
-        if(codeInfo.getStartTime()!=null && codeInfo.getStartTime().before(now)){
-            return false;
-        }
-        if(codeInfo.getEndTime()!=null && codeInfo.getEndTime().after(now)){
-            return false;
-        }*/
+//        Timestamp now = new Timestamp(System.currentTimeMillis());
+//        if(codeInfo.getStartTime()!=null && codeInfo.getStartTime().before(now)){
+//            return false;
+//        }
+//        if(codeInfo.getEndTime()!=null && codeInfo.getEndTime().after(now)){
+//            return false;
+//        }
         return true;
     }
 
