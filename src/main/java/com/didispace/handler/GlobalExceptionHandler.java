@@ -1,7 +1,9 @@
 package com.didispace.handler;
 
+import com.alibaba.fastjson.JSON;
 import com.didispace.exception.MyException;
 import com.didispace.util.WebUtil;
+import com.didispace.util.model.ResultData;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,7 +27,7 @@ public class GlobalExceptionHandler {
         logger.error(e,e);
         rep.addHeader("Content-Type","application/json;charset=UTF-8");
         PrintWriter out = rep.getWriter();
-        out.println("{\"msg\":\"{0}\"}".replace("{0}",e.getMessage()));
+        out.println(JSON.toJSONString(ResultData.fail(e.getMessage())));
         out.flush();
         out.close();
         return null;

@@ -5,6 +5,7 @@ import com.didispace.domain.AuthorizationCode;
 import com.didispace.domain.MainConfig;
 import com.didispace.domain.PopupConfig;
 import com.didispace.domain.cust.ConfigCust;
+import com.didispace.exception.MyException;
 import com.didispace.repository.AuthorizationCodeRepository;
 import com.didispace.repository.MainConfigRepository;
 import com.didispace.repository.PopupConfigRespository;
@@ -100,8 +101,10 @@ public class MainConfigController {
 
         //authorizationCode校验
         String authorizationCode = mainConfig.getAuthorizationCode();
-        if(!addCheckAuthorizationCode(authorizationCode)){
-            return ResultData.fail("授权码有误");
+        try {
+            addCheckAuthorizationCode(authorizationCode);
+        }catch (MyException e){
+            return ResultData.fail(e.getMessage());
         }
 
         //code无效化
@@ -144,20 +147,20 @@ public class MainConfigController {
      * authorizationCode校验
      * @return
      */
-    private boolean addCheckAuthorizationCode(String authorizationCode){
+    private boolean addCheckAuthorizationCode(String authorizationCode) throws MyException {
         if(authorizationCode == null){
-            return false;
+            throw new MyException("授权码为空");
         }
-        AuthorizationCode codeInfo = authorizationCodeRepository.getOne(authorizationCode);
+        AuthorizationCode codeInfo = authorizationCodeRepository.findOne(authorizationCode);
 
         if(codeInfo == null){
-            return false;
+            throw new MyException("授权码不存在");
         }
         if(!"1".equals(codeInfo.getCodeStatus())){
-            return false;
+            throw new MyException("授权码已不可用");
         }
         if(codeInfo.getAbleAddCount() <= codeInfo.getUsedAddCount()){
-            return false;
+            throw new MyException("授权码已使用");
         }
 //        Timestamp now = new Timestamp(System.currentTimeMillis());
 //        if(codeInfo.getStartTime()!=null && codeInfo.getStartTime().before(now)){
