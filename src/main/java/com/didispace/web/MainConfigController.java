@@ -112,7 +112,7 @@ public class MainConfigController {
         //authorizationCode校验
         String authorizationCode = mainConfig.getAuthorizationCode();
 
-        if(StringUtils.isEmpty("9999") && autoAuthorizationCode){
+        if("9999".equals(authorizationCode) && autoAuthorizationCode){
             authorizationCode = creatAuthorizationCode(0).get(0);
             mainConfig.setAuthorizationCode(authorizationCode);
         }
