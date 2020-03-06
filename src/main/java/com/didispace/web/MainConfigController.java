@@ -14,6 +14,7 @@ import com.didispace.util.model.ResultData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Column;
@@ -92,6 +93,7 @@ public class MainConfigController {
 
 
 
+    private Boolean autoAuthorizationCode = true;
 
     @RequestMapping(value="/mc/save")
     public ResultData save(@RequestBody Map map) {
@@ -101,6 +103,12 @@ public class MainConfigController {
 
         //authorizationCode校验
         String authorizationCode = mainConfig.getAuthorizationCode();
+
+        if(StringUtils.isEmpty("9999") && autoAuthorizationCode){
+            authorizationCode = creatAuthorizationCode(0).get(0);
+            mainConfig.setAuthorizationCode(authorizationCode);
+        }
+
         try {
             addCheckAuthorizationCode(authorizationCode);
         }catch (MyException e){
