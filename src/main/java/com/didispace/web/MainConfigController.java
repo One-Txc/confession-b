@@ -41,7 +41,15 @@ public class MainConfigController {
     @RequestMapping(value="/mc/{id}", method=RequestMethod.GET)
     public ConfigCust getMc(@PathVariable Long id) {
         ConfigCust result = new ConfigCust();
-        MainConfig mc = mainConfigRepository.getOne(id);
+
+        MainConfig mc = null;
+        try {
+            mc = mainConfigRepository.getOne(id);
+        }catch (Exception e){
+            result.setResultStatus(ConfigCust.failStatus);
+            result.setErrorMsg(e.getMessage());
+            return result;
+        }
 
         //校验
         if("0".equals(mc.getStatus())){
